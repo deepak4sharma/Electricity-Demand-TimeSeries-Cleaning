@@ -1,23 +1,37 @@
-{
- "cells": [
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "e31657bd-c78e-416c-83c6-f6fc5ba1ac28",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "",
-   "name": ""
-  },
-  "language_info": {
-   "name": ""
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 5
-}
+import matplotlib.pyplot as plt
+
+# 1. Resample the data into different averages
+daily_avg = df['electricity_demand'].resample('D').mean()
+weekly_avg = df['electricity_demand'].resample('W').mean()
+monthly_avg = df['electricity_demand'].resample('M').mean()
+yearly_avg = df['electricity_demand'].resample('Y').mean()
+
+# 2. Create the plot
+plt.figure(figsize=(14, 10))
+
+# Daily
+plt.subplot(4, 1, 1)
+plt.plot(daily_avg, color='skyblue', label='Daily Avg')
+plt.legend()
+plt.title('Electricity Demand Averages (2019-2023)')
+
+# Weekly
+plt.subplot(4, 1, 2)
+plt.plot(weekly_avg, color='orange', label='Weekly Avg')
+plt.legend()
+
+# Monthly
+plt.subplot(4, 1, 3)
+plt.plot(monthly_avg, color='green', label='Monthly Avg')
+plt.legend()
+
+# Yearly
+plt.subplot(4, 1, 4)
+plt.plot(yearly_avg, color='red', marker='o', label='Yearly Avg')
+plt.legend()
+
+plt.tight_layout()
+
+# 3. Save the image to upload to GitHub
+plt.savefig('demand_averages.png')
+plt.show()
